@@ -71,7 +71,6 @@
     BOOL is_p = (15 == _sumNum)?YES:NO;
 
     
-    
     if (is_a) {
         
         temp_Str = K_TEXT_a;
@@ -138,7 +137,7 @@
     }
     //temp_Str = K_TEXT_a;
     
-    [[AutoAttentionView sharedInstance] autoShowAttentionWith:temp_Str andWith:[UIApplication sharedApplication].keyWindow];
+    [AutoAttentionView  autoShowAttentionWith:temp_Str andWith:[UIApplication sharedApplication].keyWindow hScale:0.90f];
     
     // ...自增模拟选择长提示文字
     
