@@ -7,6 +7,7 @@
 //
 
 #import "AutoAttentionView.h"
+#import "Masonry.h"
 
 @interface AutoAttentionView ()
 
@@ -22,10 +23,12 @@ static  CGFloat c_m_b = 10.0f;
 static  CGFloat c_m_l = 10.0f;
 static  CGFloat c_m_r = 10.0f;
 static  CGFloat c_h = 0.0f;
-static  CGFloat h_scale = 0.5;
+static  CGFloat h_scale = 1.0f;
 
+static UIImageView * no_data_img = nil;
+static UILabel* no_data_lab = nil;
+static NSString * _img_Name = nil;
 static UILabel *tempLab = nil;
-
 static AutoAttentionView * share = nil;
 
 @implementation AutoAttentionView
@@ -53,7 +56,7 @@ static AutoAttentionView * share = nil;
         
         c_h = 0.0f;
         self.label = [[UILabel alloc] initWithFrame:CGRectMake((a_w - c_m_l - c_m_r)*0.50f,
-                                                               (a_h - c_m_t - c_m_b)*h_scale,
+                                                               (a_h - c_m_t - c_m_b),
                                                                c_w,
                                                                c_h)];
         self.label.backgroundColor = [UIColor blackColor];
@@ -150,7 +153,7 @@ static AutoAttentionView * share = nil;
         [view addSubview:share];
     }
 
-    [UIView animateWithDuration:0.01
+    [UIView animateWithDuration:0.3
         animations:^{
             share.label.alpha = 1.0f;
             share.c_view.alpha = 1.0f;
@@ -162,10 +165,11 @@ static AutoAttentionView * share = nil;
 
 + (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view hScale:(CGFloat)scale{
     
-    BOOL is_scale = (scale >0.30f && scale <0.90f)?YES:NO;
+    BOOL is_scale = (scale >= -0.80f && scale <= 0.80f)?YES:NO;
+    h_scale = 1.0f;
     if (is_scale) {
         
-        h_scale = scale;
+        h_scale += scale;
     }
     
     [AutoAttentionView autoShowAttentionWith:str andWith:view];
@@ -174,7 +178,7 @@ static AutoAttentionView * share = nil;
 - (void)hideNow
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.01
+        [UIView animateWithDuration:0.3
             animations:^{
                 share.label.alpha = 0;
                 share.c_view.alpha = 0;
@@ -183,6 +187,93 @@ static AutoAttentionView * share = nil;
                 [share removeFromSuperview];
             }];
     });
+}
+
+
+#pragma mark———————— 页面展示效果 <使用场景：添加无数据图片>
+
++ (void)ndv_With:(NSString *)str andWith:(__weak UIView *)s_view{
+    
+    __weak UIView *view = s_view;
+    
+    BOOL is_link_net = YES;
+    
+    no_data_img = [UIImageView new];
+    no_data_lab = [UILabel new];
+    no_data_lab.textAlignment = NSTextAlignmentCenter;
+    
+    
+    if (!no_data_img) {
+        
+        no_data_img = [UIImageView new];
+    }
+    
+    if (!no_data_lab) {
+        
+        no_data_lab = [UILabel new];
+        no_data_lab.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    if (_img_Name) {
+        
+        no_data_img.image = [UIImage imageNamed:_img_Name];
+    }else{
+        
+        no_data_img.image = [UIImage imageNamed:@"icon_wu.png"];
+    }
+    
+    [view addSubview:no_data_img];
+    [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(view).offset(12);
+        make.centerY.equalTo(view).offset(-(10+30));
+        make.width.mas_equalTo(99);
+        make.height.mas_equalTo(70);
+    }];
+    
+    
+    [view addSubview:no_data_lab];
+    [no_data_lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(view);
+        make.top.equalTo(no_data_img.mas_bottom).offset(10);
+        make.width.equalTo(view);
+        make.height.mas_equalTo(30);
+    }];
+    
+    
+    if (is_link_net) {
+        
+        // 有网络
+        no_data_lab.text = @"敬请期待";
+        
+    }else{
+        
+        // 无网络
+        no_data_lab.text = @"网络连接失败";
+    }
+
+}
+
++ (void)ndv_With:(NSString *)str img:(NSString*)imgName andWith:(__weak UIView *)s_view{
+    
+    _img_Name = imgName;
+    [AutoAttentionView ndv_With:str  andWith:s_view];
+}
+
++ (void)ndv_Remove{
+    
+    if (no_data_img) {
+        
+        [no_data_img removeFromSuperview];
+        no_data_img = nil;
+    }
+    
+    if (no_data_lab) {
+        
+        [no_data_lab removeFromSuperview];
+        no_data_lab = nil;
+    }
 }
 
 @end

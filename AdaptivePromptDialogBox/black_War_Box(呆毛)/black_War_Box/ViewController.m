@@ -48,6 +48,8 @@
     
     [super touchesBegan:touches withEvent:event];
     
+#pragma mark—————————— 模拟页面文字提示效果
+    
     NSString *temp_Str = @"";
     
     BOOL is_a = (0 == _sumNum)?YES:NO;
@@ -137,13 +139,26 @@
     }
     //temp_Str = K_TEXT_a;
     
-    [AutoAttentionView  autoShowAttentionWith:temp_Str andWith:[UIApplication sharedApplication].keyWindow hScale:0.90f];
+    [AutoAttentionView  autoShowAttentionWith:temp_Str andWith:[UIApplication sharedApplication].keyWindow hScale:-0.80f];
     
     // ...自增模拟选择长提示文字
     
     _sumNum++;
     
-    [self.view endEditing:YES];
+    
+    
+#pragma mark—————————— 模拟无数据图片加载
+    /*
+    // 模拟无数据情况下加载 无数据图
+    __weak typeof(self) WeakSelf = self;
+    [AutoAttentionView ndv_With:@"敬请期待" andWith:WeakSelf.view];
+    
+    // 1秒后模拟有数据，移除无数据组件
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [AutoAttentionView ndv_Remove];
+    });
+     */
     
 }
 
