@@ -7,6 +7,7 @@
 //
 
 #import "AutoAttentionView.h"
+#import "Masonry.h"
 
 @interface AutoAttentionView ()
 
@@ -22,8 +23,13 @@ static  CGFloat c_m_b = 10.0f;
 static  CGFloat c_m_l = 10.0f;
 static  CGFloat c_m_r = 10.0f;
 static  CGFloat c_h = 0.0f;
+static  CGFloat h_scale = 1.0f;
 
+static UIImageView * no_data_img = nil;
+static UILabel* no_data_lab = nil;
+static NSString * _img_Name = nil;
 static UILabel *tempLab = nil;
+static AutoAttentionView * share = nil;
 
 @implementation AutoAttentionView
 
@@ -50,7 +56,7 @@ static UILabel *tempLab = nil;
         
         c_h = 0.0f;
         self.label = [[UILabel alloc] initWithFrame:CGRectMake((a_w - c_m_l - c_m_r)*0.50f,
-                                                               (a_h - c_m_t - c_m_b)*0.50f,
+                                                               (a_h - c_m_t - c_m_b),
                                                                c_w,
                                                                c_h)];
         self.label.backgroundColor = [UIColor blackColor];
@@ -74,8 +80,10 @@ static UILabel *tempLab = nil;
     return self;
 }
 
-- (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view
++ (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view
 {
+    share = [AutoAttentionView sharedInstance];
+    
     c_h = 0.0f;
     b_m_l = 15.0f;
     b_m_r = 15.0f;
@@ -83,9 +91,9 @@ static UILabel *tempLab = nil;
     
     tempLab = [[UILabel alloc] init];
     [tempLab sizeToFit];
-    [self setFrame:[UIScreen mainScreen].bounds];
-    self.label.alpha = 0;
-    self.c_view.alpha = 0;
+    [share setFrame:[UIScreen mainScreen].bounds];
+    share.label.alpha = 0;
+    share.c_view.alpha = 0;
    
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
@@ -94,14 +102,14 @@ static UILabel *tempLab = nil;
     
     NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:15], NSParagraphStyleAttributeName:paragraphStyle};
     
-    self.label.attributedText = [[NSAttributedString alloc]initWithString:str attributes:attributes];
-    tempLab.attributedText = self.label.attributedText;
-    CGFloat a_w = self.frame.size.width;
-    CGFloat a_h = self.frame.size.height;
+    share.label.attributedText = [[NSAttributedString alloc]initWithString:str attributes:attributes];
+    tempLab.attributedText = share.label.attributedText;
+    CGFloat a_w = share.frame.size.width;
+    CGFloat a_h = share.frame.size.height*h_scale;
     CGFloat b_w = (a_w - b_m_l - b_m_r);
     CGFloat c_w = (b_w - c_m_l - c_m_r);
     
-    CGSize t_size = [self.label aav_getLableCGsize:CGSizeMake(c_h, 24) attributes:attributes];
+    CGSize t_size = [share.label aav_getLableCGsize:CGSizeMake(c_h, 24) attributes:attributes];
     CGFloat t_w = t_size.width;
     
     if (t_w < c_w) {
@@ -116,18 +124,18 @@ static UILabel *tempLab = nil;
 
     }
 
-    CGSize l_size = [self.label aav_getLableCGsize:CGSizeMake(c_w, c_h) attributes:attributes];
+    CGSize l_size = [share.label aav_getLableCGsize:CGSizeMake(c_w, c_h) attributes:attributes];
     
     c_h = l_size.height;
     
-    [self.label setFrame:CGRectMake(c_m_l,
+    [share.label setFrame:CGRectMake(c_m_l,
                                     c_m_t,
                                     c_w,
                                     c_h + c_m_b)];
     
     CGFloat b_m_t = (a_h  - c_h - c_m_t - c_m_b) * 0.50f;
     
-    [self.c_view setFrame:CGRectMake(b_m_l,
+    [share.c_view setFrame:CGRectMake(b_m_l,
                                      b_m_t,
                                      c_w + c_m_l + c_m_r,
                                      c_m_t + (c_h + c_m_b) + c_m_b)];
@@ -135,38 +143,137 @@ static UILabel *tempLab = nil;
 
     if (b_m_l != 15.0f) {
         
-        self.label.textAlignment = NSTextAlignmentCenter;
+        share.label.textAlignment = NSTextAlignmentCenter;
     }
     
-    if ([self.label is_NoNuLL_really:str]) {
+    if ([share.label is_NoNuLL_really:str]) {
         
-        [self addSubview:self.c_view];
+        [share addSubview:share.c_view];
         
-        [view addSubview:self];
+        [view addSubview:share];
     }
 
-    [UIView animateWithDuration:0.01
+    [UIView animateWithDuration:0.3
         animations:^{
-            self.label.alpha = 1.0f;
-            self.c_view.alpha = 1.0f;
+            share.label.alpha = 1.0f;
+            share.c_view.alpha = 1.0f;
         }
         completion:^(BOOL finished) {
-            [self performSelector:@selector(hideNow) withObject:nil afterDelay:1.0];
+            [share performSelector:@selector(hideNow) withObject:nil afterDelay:1.0];
         }];
+}
+
++ (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view hScale:(CGFloat)scale{
+    
+    BOOL is_scale = (scale >= -0.80f && scale <= 0.80f)?YES:NO;
+    h_scale = 1.0f;
+    if (is_scale) {
+        
+        h_scale += scale;
+    }
+    
+    [AutoAttentionView autoShowAttentionWith:str andWith:view];
 }
 
 - (void)hideNow
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.01
+        [UIView animateWithDuration:0.3
             animations:^{
-                self.label.alpha = 0;
-                self.c_view.alpha = 0;
+                share.label.alpha = 0;
+                share.c_view.alpha = 0;
             }
             completion:^(BOOL finished) {
-                [self removeFromSuperview];
+                [share removeFromSuperview];
             }];
     });
+}
+
+
+#pragma mark———————— 页面展示效果 <使用场景：添加无数据图片>
+
++ (void)ndv_With:(NSString *)str andWith:(__weak UIView *)s_view{
+    
+    __weak UIView *view = s_view;
+    
+    BOOL is_link_net = YES;
+    
+    no_data_img = [UIImageView new];
+    no_data_lab = [UILabel new];
+    no_data_lab.textAlignment = NSTextAlignmentCenter;
+    
+    
+    if (!no_data_img) {
+        
+        no_data_img = [UIImageView new];
+    }
+    
+    if (!no_data_lab) {
+        
+        no_data_lab = [UILabel new];
+        no_data_lab.textAlignment = NSTextAlignmentCenter;
+    }
+    
+    if (_img_Name) {
+        
+        no_data_img.image = [UIImage imageNamed:_img_Name];
+    }else{
+        
+        no_data_img.image = [UIImage imageNamed:@"icon_wu.png"];
+    }
+    
+    [view addSubview:no_data_img];
+    [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(view).offset(12);
+        make.centerY.equalTo(view).offset(-(10+30));
+        make.width.mas_equalTo(99);
+        make.height.mas_equalTo(70);
+    }];
+    
+    
+    [view addSubview:no_data_lab];
+    [no_data_lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(view);
+        make.top.equalTo(no_data_img.mas_bottom).offset(10);
+        make.width.equalTo(view);
+        make.height.mas_equalTo(30);
+    }];
+    
+    
+    if (is_link_net) {
+        
+        // 有网络
+        no_data_lab.text = @"敬请期待";
+        
+    }else{
+        
+        // 无网络
+        no_data_lab.text = @"网络连接失败";
+    }
+
+}
+
++ (void)ndv_With:(NSString *)str img:(NSString*)imgName andWith:(__weak UIView *)s_view{
+    
+    _img_Name = imgName;
+    [AutoAttentionView ndv_With:str  andWith:s_view];
+}
+
++ (void)ndv_Remove{
+    
+    if (no_data_img) {
+        
+        [no_data_img removeFromSuperview];
+        no_data_img = nil;
+    }
+    
+    if (no_data_lab) {
+        
+        [no_data_lab removeFromSuperview];
+        no_data_lab = nil;
+    }
 }
 
 @end

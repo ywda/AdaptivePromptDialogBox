@@ -139,7 +139,7 @@
     }
     //temp_Str = K_TEXT_a;
     
-    [AutoAttentionView  autoShowAttentionWith:temp_Str andWith:[UIApplication sharedApplication].keyWindow hScale:-0.80f];
+    [AutoAttentionView  autoShowAttentionWith:temp_Str andWith:[UIApplication sharedApplication].keyWindow hScale:-0.8f];
     
     // ...自增模拟选择长提示文字
     
