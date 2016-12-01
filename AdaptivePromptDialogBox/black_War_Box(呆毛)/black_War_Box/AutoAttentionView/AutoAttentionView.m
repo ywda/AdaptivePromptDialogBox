@@ -6,6 +6,9 @@
 //  Copyright © 2016年 Mac_NJW. All rights reserved.
 //
 
+#define K_NO_DATA_LAB_TAG  6302
+#define K_NO_DATA_IMG_TAG  6303
+
 #import "AutoAttentionView.h"
 #import "Masonry.h"
 
@@ -198,61 +201,66 @@ static AutoAttentionView * share = nil;
     
     BOOL is_link_net = YES;
     
-    no_data_img = [UIImageView new];
-    no_data_lab = [UILabel new];
-    no_data_lab.textAlignment = NSTextAlignmentCenter;
-    
-    
-    if (!no_data_img) {
+    if (nil == [s_view viewWithTag:K_NO_DATA_IMG_TAG]) {
         
-        no_data_img = [UIImageView new];
+        if (!no_data_img) {
+            
+            no_data_img = [UIImageView new];
+            no_data_img.tag = K_NO_DATA_IMG_TAG;
+            [view addSubview:no_data_img];
+            
+            [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.centerX.equalTo(view).offset(12);
+                make.centerY.equalTo(view).offset(-(10+30));
+                make.width.mas_equalTo(99);
+                make.height.mas_equalTo(70);
+            }];
+        }
+        
+        if (_img_Name) {
+            
+            no_data_img.image = [UIImage imageNamed:_img_Name];
+        }else{
+            
+            no_data_img.image = [UIImage imageNamed:@"icon_wu.png"];
+        }
+        
     }
     
-    if (!no_data_lab) {
+    if (nil == [s_view viewWithTag:K_NO_DATA_LAB_TAG]) {
         
-        no_data_lab = [UILabel new];
-        no_data_lab.textAlignment = NSTextAlignmentCenter;
+        if (!no_data_lab) {
+            
+            no_data_lab = [UILabel new];
+            no_data_lab.tag = K_NO_DATA_LAB_TAG;
+            no_data_lab.textAlignment = NSTextAlignmentCenter;
+            [view addSubview:no_data_lab];
+            
+            [no_data_lab mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.centerX.equalTo(view);
+                make.top.equalTo(no_data_img.mas_bottom).offset(10);
+                make.width.equalTo(view);
+                make.height.mas_equalTo(30);
+            }];
+            
+        }
     }
     
-    if (_img_Name) {
+    if (no_data_lab) {
         
-        no_data_img.image = [UIImage imageNamed:_img_Name];
-    }else{
-        
-        no_data_img.image = [UIImage imageNamed:@"icon_wu.png"];
+        if (is_link_net) {
+            
+            // 有网络
+            no_data_lab.text = str;
+            
+        }else{
+            
+            // 无网络
+            no_data_lab.text = @"网络连接失败";
+        }
     }
-    
-    [view addSubview:no_data_img];
-    [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(view).offset(12);
-        make.centerY.equalTo(view).offset(-(10+30));
-        make.width.mas_equalTo(99);
-        make.height.mas_equalTo(70);
-    }];
-    
-    
-    [view addSubview:no_data_lab];
-    [no_data_lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(view);
-        make.top.equalTo(no_data_img.mas_bottom).offset(10);
-        make.width.equalTo(view);
-        make.height.mas_equalTo(30);
-    }];
-    
-    
-    if (is_link_net) {
-        
-        // 有网络
-        no_data_lab.text = @"敬请期待";
-        
-    }else{
-        
-        // 无网络
-        no_data_lab.text = @"网络连接失败";
-    }
-
 }
 
 + (void)ndv_With:(NSString *)str img:(NSString*)imgName andWith:(__weak UIView *)s_view{
