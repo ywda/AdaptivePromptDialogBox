@@ -196,67 +196,91 @@ static AutoAttentionView * share = nil;
 #pragma mark———————— 页面展示效果 <使用场景：添加无数据图片>
 
 + (void)ndv_With:(NSString *)str andWith:(__weak UIView *)s_view{
-    
+
     __weak UIView *view = s_view;
-    
+
     BOOL is_link_net = YES;
-    
+
     if (nil == [s_view viewWithTag:K_NO_DATA_IMG_TAG]) {
-        
+
         if (!no_data_img) {
-            
+
             no_data_img = [UIImageView new];
             no_data_img.tag = K_NO_DATA_IMG_TAG;
             [view addSubview:no_data_img];
-            
+
             [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
-                
+
                 make.centerX.equalTo(view).offset(12);
                 make.centerY.equalTo(view).offset(-(10+30));
                 make.width.mas_equalTo(99);
                 make.height.mas_equalTo(70);
             }];
+        }else{
+
+            [view addSubview:no_data_img];
+
+            [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
+
+                make.centerX.equalTo(view).offset(12);
+                make.centerY.equalTo(view).offset(-(10+30));
+                make.width.mas_equalTo(99);
+                make.height.mas_equalTo(70);
+            }];
+
         }
-        
+
         if (_img_Name) {
-            
+
             no_data_img.image = [UIImage imageNamed:_img_Name];
         }else{
-            
+
             no_data_img.image = [UIImage imageNamed:@"icon_wu.png"];
         }
-        
+
     }
-    
+
     if (nil == [s_view viewWithTag:K_NO_DATA_LAB_TAG]) {
-        
+
         if (!no_data_lab) {
-            
+
             no_data_lab = [UILabel new];
             no_data_lab.tag = K_NO_DATA_LAB_TAG;
             no_data_lab.textAlignment = NSTextAlignmentCenter;
             [view addSubview:no_data_lab];
-            
+
             [no_data_lab mas_makeConstraints:^(MASConstraintMaker *make) {
-                
+
                 make.centerX.equalTo(view);
                 make.top.equalTo(no_data_img.mas_bottom).offset(10);
                 make.width.equalTo(view);
                 make.height.mas_equalTo(30);
             }];
-            
+
+        }else{
+
+            [view addSubview:no_data_lab];
+
+            [no_data_lab mas_makeConstraints:^(MASConstraintMaker *make) {
+
+                make.centerX.equalTo(view);
+                make.top.equalTo(no_data_img.mas_bottom).offset(10);
+                make.width.equalTo(view);
+                make.height.mas_equalTo(30);
+            }];
         }
+
     }
-    
+
     if (no_data_lab) {
-        
+
         if (is_link_net) {
-            
+
             // 有网络
             no_data_lab.text = str;
-            
+
         }else{
-            
+
             // 无网络
             no_data_lab.text = @"网络连接失败";
         }

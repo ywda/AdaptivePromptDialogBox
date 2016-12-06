@@ -216,6 +216,18 @@ static AutoAttentionView * share = nil;
                 make.width.mas_equalTo(99);
                 make.height.mas_equalTo(70);
             }];
+        }else{
+            
+            [view addSubview:no_data_img];
+
+            [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
+
+                make.centerX.equalTo(view).offset(12);
+                make.centerY.equalTo(view).offset(-(10+30));
+                make.width.mas_equalTo(99);
+                make.height.mas_equalTo(70);
+            }];
+
         }
         
         if (_img_Name) {
@@ -245,7 +257,19 @@ static AutoAttentionView * share = nil;
                 make.height.mas_equalTo(30);
             }];
             
+        }else{
+
+            [view addSubview:no_data_lab];
+
+            [no_data_lab mas_makeConstraints:^(MASConstraintMaker *make) {
+
+                make.centerX.equalTo(view);
+                make.top.equalTo(no_data_img.mas_bottom).offset(10);
+                make.width.equalTo(view);
+                make.height.mas_equalTo(30);
+            }];
         }
+
     }
     
     if (no_data_lab) {
