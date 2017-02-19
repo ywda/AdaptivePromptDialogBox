@@ -318,7 +318,7 @@
 				TargetAttributes = {
 					A9C64B171DEE70CF00FB2E2D = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = QHGU67QPAT;
+						DevelopmentTeam = VJHLUPM383;
 						ProvisioningStyle = Automatic;
 					};
 					A9C64B301DEE70CF00FB2E2D = {
@@ -551,7 +551,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QHGU67QPAT;
+				DEVELOPMENT_TEAM = VJHLUPM383;
 				INFOPLIST_FILE = black_War_Box/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Block-demo.black-War-Box";
@@ -563,7 +563,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QHGU67QPAT;
+				DEVELOPMENT_TEAM = VJHLUPM383;
 				INFOPLIST_FILE = black_War_Box/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Block-demo.black-War-Box";

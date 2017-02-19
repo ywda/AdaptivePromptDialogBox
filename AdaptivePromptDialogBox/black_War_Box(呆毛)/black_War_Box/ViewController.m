@@ -6,159 +6,89 @@
 //  Copyright © 2016年 Mac_NJW. All rights reserved.
 //
 
-#define K_TEXT_a  @"倭"
-#define K_TEXT_b  @"倭人"
-#define K_TEXT_c  @"倭人为"
-#define K_TEXT_d  @"李光耀一"
-#define K_TEXT_e  @"倭人为寇"
-#define K_TEXT_f  @"倭人为寇,是寇"
-#define K_TEXT_g  @"倭人为寇,是为倭寇。"
-#define K_TEXT_h  @"李光耀一人民行动党人"
-#define K_TEXT_i  @"倭人为寇是寇是寇是寇是寇"
-#define K_TEXT_j  @"倭人为寇,是寇是寇是寇是寇是寇"
-#define K_TEXT_k  @"倭人为寇,是为倭寇。是寇是寇是寇是寇"
-#define K_TEXT_l  @"李光耀一人民行动党人民行动党人民行动党"
-#define K_TEXT_m  @"倭人为寇是寇是寇是寇是寇是寇是寇是寇是寇"
-#define K_TEXT_n  @"倭人为寇,是寇是寇是寇是寇是寇是寇是寇是寇是寇"
-#define K_TEXT_o  @"倭人为寇,是为倭寇。是寇是寇是寇是寇是寇是寇是寇是寇"
-#define K_TEXT_p  @"李光耀（Lee Kuan Yew，1923年09月16日~ 2015年03月23日），又名GCMG、CH，新加坡华人，祖籍广东省梅州市大埔县高陂镇党溪乡，毕业于新加坡莱佛士学院，新加坡人民行动党创始人之一"
-
 
 #import "ViewController.h"
 #import "AutoAttentionView.h"
 
 @interface ViewController ()
-{
-    int _sumNum;
-}
+
+@property (weak, nonatomic) IBOutlet UITextView *textContentTV;
+@property (weak, nonatomic) IBOutlet UITextField *paramTF;
+@property (weak, nonatomic) IBOutlet UIButton *dataStatusShowBtn;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    _sumNum = 0;
+
+}
+
+// 提示文案
+- (IBAction)showPromptCopywriter:(id)sender {
     
+    if ([self.paramTF.text isEqualToString:@""]) {
+        self.paramTF.text = @"0";
+    }
+    
+    if ([self.textContentTV.text isEqualToString:@""]) {
+        
+        self.textContentTV.text = @"请 star 我一下！";
+    }
+    
+    [AutoAttentionView autoShowAttentionWith:self.textContentTV.text
+                                     andWith:self.view
+                                      hScale:[self.paramTF.text floatValue]];
+}
+
+- (IBAction)setDefaultParm:(id)sender {
+    self.paramTF.text = @"0.8";
+}
+
+- (IBAction)clearTVText:(id)sender {
+    
+    self.textContentTV.text = @"";
+}
+
+- (IBAction)stepAction:(UIStepper *)sender {
+    
+    self.paramTF.text =[NSString stringWithFormat:@"%f",sender.value];
 }
 
 
-// 模拟黑框出现
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+// 模拟网络请求有无数据占位图
+- (IBAction)noNetAndDataJudge:(id)sender {
     
-    [super touchesBegan:touches withEvent:event];
+    [self.dataStatusShowBtn setTitle:@"模拟网络请求无数据" forState:UIControlStateNormal];
     
-#pragma mark—————————— 模拟页面文字提示效果
-    
-    NSString *temp_Str = @"";
-    
-    BOOL is_a = (0 == _sumNum)?YES:NO;
-    BOOL is_b = (1 == _sumNum)?YES:NO;
-    BOOL is_c = (2 == _sumNum)?YES:NO;
-    BOOL is_d = (3 == _sumNum)?YES:NO;
-    
-    BOOL is_e = (4 == _sumNum)?YES:NO;
-    BOOL is_f = (5 == _sumNum)?YES:NO;
-    BOOL is_g = (6 == _sumNum)?YES:NO;
-    BOOL is_h = (7 == _sumNum)?YES:NO;
-    
-    BOOL is_i = (8 == _sumNum)?YES:NO;
-    BOOL is_j = (9 == _sumNum)?YES:NO;
-    BOOL is_k = (10 == _sumNum)?YES:NO;
-    BOOL is_l = (11 == _sumNum)?YES:NO;
-    
-    BOOL is_m = (12 == _sumNum)?YES:NO;
-    BOOL is_n = (13 == _sumNum)?YES:NO;
-    BOOL is_o = (14 == _sumNum)?YES:NO;
-    BOOL is_p = (15 == _sumNum)?YES:NO;
-
-    
-    if (is_a) {
-        
-        temp_Str = K_TEXT_a;
-    }
-    else if (is_b) {
-        
-        temp_Str = K_TEXT_b;
-    }
-    else if (is_c) {
-        
-        temp_Str = K_TEXT_c;
-    }
-    else if (is_d) {
-        
-        temp_Str = K_TEXT_d;
-    }
-    else if (is_e) {//
-        
-        temp_Str = K_TEXT_e;
-    }
-    else if (is_f) {
-        
-        temp_Str = K_TEXT_f;
-    }
-    else if (is_g) {
-        
-        temp_Str = K_TEXT_g;
-    }
-    else if (is_h) {
-        
-        temp_Str = K_TEXT_h;
-    }
-    else if (is_i) {
-        
-        temp_Str = K_TEXT_i;
-    }else if (is_j) {
-        
-        temp_Str = K_TEXT_j;
-    }else if (is_k) {
-        
-        temp_Str = K_TEXT_k;
-    }else if (is_l) {
-        
-        temp_Str = K_TEXT_l;
-    }
-    else if (is_m) {
-        
-        temp_Str = K_TEXT_m;
-    }
-    else if (is_n) {
-        
-        temp_Str = K_TEXT_n;
-    }
-    else if (is_o) {
-        
-        temp_Str = K_TEXT_o;
-    }
-    else if (is_p) {
-        
-        temp_Str = K_TEXT_p;
-    }else{
-        
-        _sumNum = -1;//-1 模拟空字符串；0开始才是上面的判定开始
-    }
-    //temp_Str = K_TEXT_a;
-    
-    [AutoAttentionView  autoShowAttentionWith:temp_Str andWith:[UIApplication sharedApplication].keyWindow hScale:-0.8f];
-    
-    // ...自增模拟选择长提示文字
-    
-    _sumNum++;
-    
-    
-    
-#pragma mark—————————— 模拟无数据图片加载
-    /*
     // 模拟无数据情况下加载 无数据图
     __weak typeof(self) WeakSelf = self;
+    
     [AutoAttentionView ndv_With:@"敬请期待" andWith:WeakSelf.view];
     
     // 1秒后模拟有数据，移除无数据组件
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
+        if ([self.paramTF.text isEqualToString:@""]) {
+            self.paramTF.text = @"0";
+        }
+        
+         [self.dataStatusShowBtn setTitle:@"处于有数据状态" forState:UIControlStateNormal];
+        
+        [AutoAttentionView autoShowAttentionWith:@"网络连接后，模拟加载出了数据，占位图片自动消失"
+                                         andWith:self.view
+                                          hScale:[self.paramTF.text floatValue]];
+        
         [AutoAttentionView ndv_Remove];
     });
-     */
+    
+}
+
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
     
 }
 
