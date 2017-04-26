@@ -13,10 +13,10 @@
 
 #pragma mark———————— 页面文字提示效果
 
-/* 提示文字(str) 到 父视图上 (view) 🐂*/
+/* 提示文字(str) 到 父视图上 (view) */
 + (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view;
 
-/* 提示文字(str) 到 父视图上 (view) 设置提示框（偏上、中、下部位 def = 1.0f 中间<-0.80f~0.80f>） 🐂*/
+/* 提示文字(str) 到 父视图上 (view) 设置提示框（偏上、中、下部位 def = 1.0f 中间<-0.80f~0.80f>） */
 + (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view hScale:(CGFloat)scale;
 
 
