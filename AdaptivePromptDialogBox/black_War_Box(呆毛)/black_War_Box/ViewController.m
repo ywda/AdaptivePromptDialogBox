@@ -34,7 +34,7 @@
     
     if ([self.textContentTV.text isEqualToString:@""]) {
         
-        self.textContentTV.text = @"请 star 我一下！";
+        self.textContentTV.text = @"你好，世界！";
     }
     
     [AutoAttentionView autoShowAttentionWith:self.textContentTV.text
@@ -65,10 +65,10 @@
     // 模拟无数据情况下加载 无数据图
     __weak typeof(self) WeakSelf = self;
     
-    [AutoAttentionView ndv_With:@"敬请期待" andWith:WeakSelf.view];
+    [AutoAttentionView noDataViewWith:@"敬请期待" andWith:WeakSelf.view];
     
     // 1秒后模拟有数据，移除无数据组件
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         if ([self.paramTF.text isEqualToString:@""]) {
             self.paramTF.text = @"0";
@@ -80,7 +80,7 @@
                                          andWith:self.view
                                           hScale:[self.paramTF.text floatValue]];
         
-        [AutoAttentionView ndv_Remove];
+        [AutoAttentionView noDataViewRemove];
     });
     
 }

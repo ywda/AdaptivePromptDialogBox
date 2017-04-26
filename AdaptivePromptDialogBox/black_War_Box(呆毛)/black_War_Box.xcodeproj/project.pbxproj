@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		345831EB1EB051A7006A1891 /* AutoAttentionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 345831E71EB051A7006A1891 /* AutoAttentionView.m */; };
+		345831EC1EB051A7006A1891 /* UILabel+aav.m in Sources */ = {isa = PBXBuildFile; fileRef = 345831EA1EB051A7006A1891 /* UILabel+aav.m */; };
 		A9C64B1D1DEE70CF00FB2E2D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B1C1DEE70CF00FB2E2D /* main.m */; };
 		A9C64B201DEE70CF00FB2E2D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B1F1DEE70CF00FB2E2D /* AppDelegate.m */; };
 		A9C64B231DEE70CF00FB2E2D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B221DEE70CF00FB2E2D /* ViewController.m */; };
@@ -15,11 +17,6 @@
 		A9C64B2B1DEE70CF00FB2E2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9C64B291DEE70CF00FB2E2D /* LaunchScreen.storyboard */; };
 		A9C64B361DEE70CF00FB2E2D /* black_War_BoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B351DEE70CF00FB2E2D /* black_War_BoxTests.m */; };
 		A9C64B411DEE70CF00FB2E2D /* black_War_BoxUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B401DEE70CF00FB2E2D /* black_War_BoxUITests.m */; };
-		A9C64B511DEE711700FB2E2D /* AutoAttentionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B501DEE711700FB2E2D /* AutoAttentionView.m */; };
-		A9C64B541DEE766A00FB2E2D /* UILabel+aav.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B531DEE766A00FB2E2D /* UILabel+aav.m */; };
-		A9C64B7E1DEEF3B400FB2E2D /* icon_wu.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C64B7B1DEEF3B400FB2E2D /* icon_wu.png */; };
-		A9C64B7F1DEEF3B400FB2E2D /* icon_wu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C64B7C1DEEF3B400FB2E2D /* icon_wu@2x.png */; };
-		A9C64B801DEEF3B400FB2E2D /* icon_wu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C64B7D1DEEF3B400FB2E2D /* icon_wu@3x.png */; };
 		A9C64B9C1DEEF4D900FB2E2D /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B841DEEF4D900FB2E2D /* MASCompositeConstraint.m */; };
 		A9C64B9D1DEEF4D900FB2E2D /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B871DEEF4D900FB2E2D /* MASConstraint.m */; };
 		A9C64B9E1DEEF4D900FB2E2D /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C64B891DEEF4D900FB2E2D /* MASConstraintMaker.m */; };
@@ -50,6 +47,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		345831E61EB051A7006A1891 /* AutoAttentionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoAttentionView.h; sourceTree = "<group>"; };
+		345831E71EB051A7006A1891 /* AutoAttentionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoAttentionView.m; sourceTree = "<group>"; };
+		345831E91EB051A7006A1891 /* UILabel+aav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+aav.h"; sourceTree = "<group>"; };
+		345831EA1EB051A7006A1891 /* UILabel+aav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+aav.m"; sourceTree = "<group>"; };
 		A9C64B181DEE70CF00FB2E2D /* black_War_Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = black_War_Box.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C64B1C1DEE70CF00FB2E2D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A9C64B1E1DEE70CF00FB2E2D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -66,13 +67,6 @@
 		A9C64B3C1DEE70CF00FB2E2D /* black_War_BoxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = black_War_BoxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C64B401DEE70CF00FB2E2D /* black_War_BoxUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = black_War_BoxUITests.m; sourceTree = "<group>"; };
 		A9C64B421DEE70CF00FB2E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9C64B4F1DEE711700FB2E2D /* AutoAttentionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoAttentionView.h; sourceTree = "<group>"; };
-		A9C64B501DEE711700FB2E2D /* AutoAttentionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoAttentionView.m; sourceTree = "<group>"; };
-		A9C64B521DEE766A00FB2E2D /* UILabel+aav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+aav.h"; sourceTree = "<group>"; };
-		A9C64B531DEE766A00FB2E2D /* UILabel+aav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+aav.m"; sourceTree = "<group>"; };
-		A9C64B7B1DEEF3B400FB2E2D /* icon_wu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_wu.png; sourceTree = "<group>"; };
-		A9C64B7C1DEEF3B400FB2E2D /* icon_wu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_wu@2x.png"; sourceTree = "<group>"; };
-		A9C64B7D1DEEF3B400FB2E2D /* icon_wu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_wu@3x.png"; sourceTree = "<group>"; };
 		A9C64B831DEEF4D900FB2E2D /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		A9C64B841DEEF4D900FB2E2D /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		A9C64B851DEEF4D900FB2E2D /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -125,6 +119,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		345831E51EB051A7006A1891 /* AutoAttentionView */ = {
+			isa = PBXGroup;
+			children = (
+				345831E61EB051A7006A1891 /* AutoAttentionView.h */,
+				345831E71EB051A7006A1891 /* AutoAttentionView.m */,
+				345831E81EB051A7006A1891 /* NoData_Img */,
+				345831E91EB051A7006A1891 /* UILabel+aav.h */,
+				345831EA1EB051A7006A1891 /* UILabel+aav.m */,
+			);
+			path = AutoAttentionView;
+			sourceTree = "<group>";
+		};
+		345831E81EB051A7006A1891 /* NoData_Img */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NoData_Img;
+			sourceTree = "<group>";
+		};
 		A9C64B0F1DEE70CF00FB2E2D = {
 			isa = PBXGroup;
 			children = (
@@ -149,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				A9C64B811DEEF4BD00FB2E2D /* 3RD */,
-				A9C64B4E1DEE711700FB2E2D /* AutoAttentionView */,
+				345831E51EB051A7006A1891 /* AutoAttentionView */,
 				A9C64B1E1DEE70CF00FB2E2D /* AppDelegate.h */,
 				A9C64B1F1DEE70CF00FB2E2D /* AppDelegate.m */,
 				A9C64B211DEE70CF00FB2E2D /* ViewController.h */,
@@ -187,28 +200,6 @@
 				A9C64B421DEE70CF00FB2E2D /* Info.plist */,
 			);
 			path = black_War_BoxUITests;
-			sourceTree = "<group>";
-		};
-		A9C64B4E1DEE711700FB2E2D /* AutoAttentionView */ = {
-			isa = PBXGroup;
-			children = (
-				A9C64B7A1DEEF3B400FB2E2D /* NoData_Img */,
-				A9C64B4F1DEE711700FB2E2D /* AutoAttentionView.h */,
-				A9C64B501DEE711700FB2E2D /* AutoAttentionView.m */,
-				A9C64B521DEE766A00FB2E2D /* UILabel+aav.h */,
-				A9C64B531DEE766A00FB2E2D /* UILabel+aav.m */,
-			);
-			path = AutoAttentionView;
-			sourceTree = "<group>";
-		};
-		A9C64B7A1DEEF3B400FB2E2D /* NoData_Img */ = {
-			isa = PBXGroup;
-			children = (
-				A9C64B7B1DEEF3B400FB2E2D /* icon_wu.png */,
-				A9C64B7C1DEEF3B400FB2E2D /* icon_wu@2x.png */,
-				A9C64B7D1DEEF3B400FB2E2D /* icon_wu@3x.png */,
-			);
-			path = NoData_Img;
 			sourceTree = "<group>";
 		};
 		A9C64B811DEEF4BD00FB2E2D /* 3RD */ = {
@@ -362,10 +353,7 @@
 			files = (
 				A9C64B2B1DEE70CF00FB2E2D /* LaunchScreen.storyboard in Resources */,
 				A9C64B281DEE70CF00FB2E2D /* Assets.xcassets in Resources */,
-				A9C64B7E1DEEF3B400FB2E2D /* icon_wu.png in Resources */,
 				A9C64B261DEE70CF00FB2E2D /* Main.storyboard in Resources */,
-				A9C64B801DEEF3B400FB2E2D /* icon_wu@3x.png in Resources */,
-				A9C64B7F1DEEF3B400FB2E2D /* icon_wu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,15 +379,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9C64BA31DEEF4D900FB2E2D /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				A9C64B511DEE711700FB2E2D /* AutoAttentionView.m in Sources */,
 				A9C64BA11DEEF4D900FB2E2D /* MASViewConstraint.m in Sources */,
 				A9C64B231DEE70CF00FB2E2D /* ViewController.m in Sources */,
-				A9C64B541DEE766A00FB2E2D /* UILabel+aav.m in Sources */,
 				A9C64B201DEE70CF00FB2E2D /* AppDelegate.m in Sources */,
 				A9C64BA41DEEF4D900FB2E2D /* View+MASAdditions.m in Sources */,
 				A9C64B9C1DEEF4D900FB2E2D /* MASCompositeConstraint.m in Sources */,
 				A9C64BA01DEEF4D900FB2E2D /* MASViewAttribute.m in Sources */,
+				345831EC1EB051A7006A1891 /* UILabel+aav.m in Sources */,
 				A9C64B9E1DEEF4D900FB2E2D /* MASConstraintMaker.m in Sources */,
+				345831EB1EB051A7006A1891 /* AutoAttentionView.m in Sources */,
 				A9C64BA21DEEF4D900FB2E2D /* NSArray+MASAdditions.m in Sources */,
 				A9C64BA51DEEF4D900FB2E2D /* ViewController+MASAdditions.m in Sources */,
 				A9C64B9D1DEEF4D900FB2E2D /* MASConstraint.m in Sources */,

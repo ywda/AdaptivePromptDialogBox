@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Mac_NJW. All rights reserved.
 //
 
-#define K_NO_DATA_LAB_TAG  6302
-#define K_NO_DATA_IMG_TAG  6303
+#define KNoDataLabTag  6302
+#define KNoDataImgTag  6303
 
 #import "AutoAttentionView.h"
 #import "Masonry.h"
@@ -15,18 +15,18 @@
 @interface AutoAttentionView ()
 
 @property(nonatomic, strong) UILabel *label;
-@property(nonatomic,strong)UIView *c_view;
+@property(nonatomic,strong)UIView *containerView;
 
 @end
 
-static  CGFloat b_m_l = 15.0f;
-static  CGFloat b_m_r = 15.0f;
-static  CGFloat c_m_t = 10.0f;
-static  CGFloat c_m_b = 10.0f;
-static  CGFloat c_m_l = 10.0f;
-static  CGFloat c_m_r = 10.0f;
-static  CGFloat c_h = 0.0f;
-static  CGFloat h_scale = 1.0f;
+static  CGFloat outterViewXLeft = 15.0f;
+static  CGFloat outterViewXRight = 15.0f;
+static  CGFloat containerViewMarginTop = 10.0f;
+static  CGFloat containerViewMarginBottom = 10.0f;
+static  CGFloat containerViewMarginLeft = 10.0f;
+static  CGFloat containerViewMarginRight = 10.0f;
+static  CGFloat containerHeight = 0.0f;
+static  CGFloat orignYscale = 1.0f;
 
 static UIImageView * no_data_img = nil;
 static UILabel* no_data_lab = nil;
@@ -52,16 +52,16 @@ static AutoAttentionView * share = nil;
     {
         self.backgroundColor = [UIColor clearColor];
 
-        CGFloat a_w = self.frame.size.width;
-        CGFloat a_h = self.frame.size.height;
-        CGFloat b_w = (a_w - b_m_l - b_m_r);
-        CGFloat c_w = (b_w - c_m_l - c_m_r);
+        CGFloat screenWidth = self.frame.size.width;
+        CGFloat screenHeight = self.frame.size.height;
+        CGFloat b_w = (screenWidth - outterViewXLeft - outterViewXRight);
+        CGFloat containerWidth = (b_w - containerViewMarginLeft - containerViewMarginRight);
         
-        c_h = 0.0f;
-        self.label = [[UILabel alloc] initWithFrame:CGRectMake((a_w - c_m_l - c_m_r)*0.50f,
-                                                               (a_h - c_m_t - c_m_b),
-                                                               c_w,
-                                                               c_h)];
+        containerHeight = 0.0f;
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth - containerViewMarginLeft - containerViewMarginRight)*0.50f,
+                                                               (screenHeight - containerViewMarginTop - containerViewMarginBottom),
+                                                               containerWidth,
+                                                               containerHeight)];
         self.label.backgroundColor = [UIColor blackColor];
         [self.label sizeToFit];
         self.label.layer.cornerRadius = 3;
@@ -70,33 +70,33 @@ static AutoAttentionView * share = nil;
         self.label.textAlignment = NSTextAlignmentCenter;
         self.label.font = [UIFont systemFontOfSize:15];
         
-        self.c_view = [[UIView alloc] initWithFrame:self.label.frame];
-        self.c_view.backgroundColor = self.label.backgroundColor;
-        self.c_view.layer.cornerRadius = self.label.layer.cornerRadius;
-        [self.c_view.layer setMasksToBounds:YES];
+        self.containerView = [[UIView alloc] initWithFrame:self.label.frame];
+        self.containerView.backgroundColor = self.label.backgroundColor;
+        self.containerView.layer.cornerRadius = self.label.layer.cornerRadius;
+        [self.containerView.layer setMasksToBounds:YES];
         
-        [self.c_view addSubview:self.label];
-        [self addSubview:self.c_view];
+        [self.containerView addSubview:self.label];
+        [self addSubview:self.containerView];
         [self bringSubviewToFront:self.label];
   
     }
     return self;
 }
 
-+ (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view
++ (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)superView
 {
     share = [AutoAttentionView sharedInstance];
     
-    c_h = 0.0f;
-    b_m_l = 15.0f;
-    b_m_r = 15.0f;
-    c_m_l = 10.0f;
+    containerHeight = 0.0f;
+    outterViewXLeft = 15.0f;
+    outterViewXRight = 15.0f;
+    containerViewMarginLeft = 10.0f;
     
     tempLab = [[UILabel alloc] init];
     [tempLab sizeToFit];
     [share setFrame:[UIScreen mainScreen].bounds];
     share.label.alpha = 0;
-    share.c_view.alpha = 0;
+    share.containerView.alpha = 0;
    
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
@@ -107,75 +107,75 @@ static AutoAttentionView * share = nil;
     
     share.label.attributedText = [[NSAttributedString alloc]initWithString:str attributes:attributes];
     tempLab.attributedText = share.label.attributedText;
-    CGFloat a_w = share.frame.size.width;
-    CGFloat a_h = share.frame.size.height*h_scale;
-    CGFloat b_w = (a_w - b_m_l - b_m_r);
-    CGFloat c_w = (b_w - c_m_l - c_m_r);
+    CGFloat screenWidth = share.frame.size.width;
+    CGFloat screenHeight = share.frame.size.height*orignYscale;
+    CGFloat outterViewWidth = (screenWidth - outterViewXLeft - outterViewXRight);
+    CGFloat containerViewWidth = (outterViewWidth - containerViewMarginLeft - containerViewMarginRight);
     
-    CGSize t_size = [share.label aav_getLableCGsize:CGSizeMake(c_h, 24) attributes:attributes];
-    CGFloat t_w = t_size.width;
+    CGSize t_size = [share.label aav_getLableCGsize:CGSizeMake(containerHeight, 24) attributes:attributes];
+    CGFloat tempWidth = t_size.width;
     
-    if (t_w < c_w) {
+    if (tempWidth < containerViewWidth) {
         
-        if (t_w < a_w*0.33f) {
+        if (tempWidth < screenWidth*0.33f) {
             
-            t_w = a_w*0.33f;
+            tempWidth = screenWidth*0.33f;
         }
         
-        c_w = t_w;
-        b_m_l = (a_w - c_w - c_m_l - c_m_r)*0.50f;
+        containerViewWidth = tempWidth;
+        outterViewXLeft = (screenWidth - containerViewWidth - containerViewMarginLeft - containerViewMarginRight)*0.50f;
 
     }
 
-    CGSize l_size = [share.label aav_getLableCGsize:CGSizeMake(c_w, c_h) attributes:attributes];
+    CGSize l_size = [share.label aav_getLableCGsize:CGSizeMake(containerViewWidth, containerHeight) attributes:attributes];
     
-    c_h = l_size.height;
+    containerHeight = l_size.height;
     
-    [share.label setFrame:CGRectMake(c_m_l,
-                                    c_m_t,
-                                    c_w,
-                                    c_h + c_m_b)];
+    [share.label setFrame:CGRectMake(containerViewMarginLeft,
+                                    containerViewMarginTop,
+                                    containerViewWidth,
+                                    containerHeight + containerViewMarginBottom)];
     
-    CGFloat b_m_t = (a_h  - c_h - c_m_t - c_m_b) * 0.50f;
+    CGFloat b_m_t = (screenHeight  - containerHeight - containerViewMarginTop - containerViewMarginBottom) * 0.50f;
     
-    [share.c_view setFrame:CGRectMake(b_m_l,
+    [share.containerView setFrame:CGRectMake(outterViewXLeft,
                                      b_m_t,
-                                     c_w + c_m_l + c_m_r,
-                                     c_m_t + (c_h + c_m_b) + c_m_b)];
+                                     containerViewWidth + containerViewMarginLeft + containerViewMarginRight,
+                                     containerViewMarginTop + (containerHeight + containerViewMarginBottom) + containerViewMarginBottom)];
 
 
-    if (b_m_l != 15.0f) {
+    if (outterViewXLeft != 15.0f) {
         
         share.label.textAlignment = NSTextAlignmentCenter;
     }
     
     if ([share.label is_NoNuLL_really:str]) {
         
-        [share addSubview:share.c_view];
+        [share addSubview:share.containerView];
         
-        [view addSubview:share];
+        [superView addSubview:share];
     }
 
     [UIView animateWithDuration:0.3
         animations:^{
             share.label.alpha = 1.0f;
-            share.c_view.alpha = 1.0f;
+            share.containerView.alpha = 1.0f;
         }
         completion:^(BOOL finished) {
             [share performSelector:@selector(hideNow) withObject:nil afterDelay:1.0];
         }];
 }
 
-+ (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)view hScale:(CGFloat)scale{
++ (void)autoShowAttentionWith:(NSString *)str andWith:(UIView *)superView hScale:(CGFloat)scale{
     
     BOOL is_scale = (scale >= -0.80f && scale <= 0.80f)?YES:NO;
-    h_scale = 1.0f;
+    orignYscale = 1.0f;
     if (is_scale) {
         
-        h_scale += scale;
+        orignYscale += scale;
     }
     
-    [AutoAttentionView autoShowAttentionWith:str andWith:view];
+    [AutoAttentionView autoShowAttentionWith:str andWith:superView];
 }
 
 - (void)hideNow
@@ -184,7 +184,7 @@ static AutoAttentionView * share = nil;
         [UIView animateWithDuration:0.3
             animations:^{
                 share.label.alpha = 0;
-                share.c_view.alpha = 0;
+                share.containerView.alpha = 0;
             }
             completion:^(BOOL finished) {
                 [share removeFromSuperview];
@@ -195,18 +195,18 @@ static AutoAttentionView * share = nil;
 
 #pragma mark———————— 页面展示效果 <使用场景：添加无数据图片>
 
-+ (void)ndv_With:(NSString *)str andWith:(__weak UIView *)s_view{
++ (void)noDataViewWith:(NSString *)str andWith:(__weak UIView *)superView{
     
-    __weak UIView *view = s_view;
+    __weak UIView *view = superView;
     
     BOOL is_link_net = YES;
     
-    if (nil == [s_view viewWithTag:K_NO_DATA_IMG_TAG]) {
+    if (nil == [superView viewWithTag:KNoDataImgTag]) {
         
         if (!no_data_img) {
             
             no_data_img = [UIImageView new];
-            no_data_img.tag = K_NO_DATA_IMG_TAG;
+            no_data_img.tag = KNoDataImgTag;
             [view addSubview:no_data_img];
             
             [no_data_img mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -240,12 +240,12 @@ static AutoAttentionView * share = nil;
         
     }
     
-    if (nil == [s_view viewWithTag:K_NO_DATA_LAB_TAG]) {
+    if (nil == [superView viewWithTag:KNoDataLabTag]) {
         
         if (!no_data_lab) {
             
             no_data_lab = [UILabel new];
-            no_data_lab.tag = K_NO_DATA_LAB_TAG;
+            no_data_lab.tag = KNoDataLabTag;
             no_data_lab.textAlignment = NSTextAlignmentCenter;
             [view addSubview:no_data_lab];
             
@@ -287,13 +287,13 @@ static AutoAttentionView * share = nil;
     }
 }
 
-+ (void)ndv_With:(NSString *)str img:(NSString*)imgName andWith:(__weak UIView *)s_view{
++ (void)noDataViewWith:(NSString *)str img:(NSString*)imgName andWith:(__weak UIView *)superView{
     
     _img_Name = imgName;
-    [AutoAttentionView ndv_With:str  andWith:s_view];
+    [AutoAttentionView noDataViewWith:str  andWith:superView];
 }
 
-+ (void)ndv_Remove{
++ (void)noDataViewRemove{
     
     if (no_data_img) {
         
